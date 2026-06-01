@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartBus AI Assistant</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#0f172a;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.chat-container{
+width:90%;
+max-width:900px;
+height:90vh;
+background:#1e293b;
+border-radius:20px;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+}
+
+.chat-header{
+background:#2563eb;
+padding:20px;
+font-size:24px;
+font-weight:bold;
+color:white;
+}
+
+.chat-box{
+flex:1;
+padding:20px;
+overflow-y:auto;
+}
+
+.user{
+background:#2563eb;
+color:white;
+padding:12px;
+border-radius:15px;
+margin:10px 0;
+margin-left:auto;
+width:fit-content;
+max-width:70%;
+}
+
+.bot{
+background:#334155;
+color:white;
+padding:12px;
+border-radius:15px;
+margin:10px 0;
+width:fit-content;
+max-width:70%;
+}
+
+.chat-input{
+display:flex;
+padding:15px;
+background:#111827;
+}
+
+.chat-input input{
+flex:1;
+padding:12px;
+border:none;
+border-radius:10px;
+outline:none;
+}
+
+.chat-input button{
+padding:12px 20px;
+margin-left:10px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+.chat-input button:hover{
+background:#1d4ed8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="chat-container">
+
+<div class="chat-header">
+🤖 SmartBus AI Assistant
+</div>
+
+<div class="chat-box" id="chatBox">
+
+<div class="bot">
+Hello 👋 Ask me anything about buses, routes, ETA, attendance, fee status, drivers or transport.
+</div>
+
+</div>
+
+<div class="chat-input">
+
+<input
+type="text"
+id="userInput"
+placeholder="Ask your question...">
+
+<button onclick="sendMessage()">
+Send
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+async function sendMessage(){
+
+let input =
+document.getElementById("userInput");
+
+let message =
+input.value.trim();
+
+if(message=="") return;
+
+let chatBox =
+document.getElementById("chatBox");
+
+chatBox.innerHTML += `
+<div class="user">${message}</div>
+`;
+
+input.value="";
+
+try{
+
+let response =
+await fetch(
+"http://127.0.0.1:5000/chat",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+message:message
+})
+}
+);
+
+let data =
+await response.json();
+
+chatBox.innerHTML += `
+<div class="bot">${data.reply}</div>
+`;
+
+chatBox.scrollTop =
+chatBox.scrollHeight;
+
+}
+catch(err){
+
+chatBox.innerHTML += `
+<div class="bot">
+❌ Server Not Running
+</div>
+`;
+
+}
+
+}
+
+document
+.getElementById("userInput")
+.addEventListener("keypress",function(e){
+
+if(e.key==="Enter"){
+sendMessage();
+}
+
+});
+
+</script>
+
+</body>
+</html>

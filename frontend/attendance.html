@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attendance Management</title>
+
+<style>
+
+body{
+background:#0f172a;
+color:white;
+font-family:Arial,sans-serif;
+padding:30px;
+}
+
+h1{
+margin-bottom:20px;
+}
+
+input,select{
+width:300px;
+padding:12px;
+margin:10px 0;
+border:none;
+border-radius:8px;
+}
+
+button{
+padding:12px 20px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+table{
+width:100%;
+margin-top:20px;
+border-collapse:collapse;
+background:#1e293b;
+}
+
+th{
+background:#0ea5e9;
+padding:12px;
+}
+
+td{
+padding:12px;
+text-align:center;
+border:1px solid #334155;
+}
+
+</style>
+
+</head>
+<body>
+
+<h1>📋 Attendance Management</h1>
+
+<input
+type="text"
+id="studentName"
+placeholder="Enter Student Name">
+
+<br>
+
+<input
+type="text"
+id="rollNo"
+placeholder="Enter Roll Number">
+
+<br>
+
+<select id="feeStatus">
+<option value="">Select Fee Status</option>
+<option>✅ Paid</option>
+<option>❌ Unpaid</option>
+</select>
+
+<br><br>
+
+<button onclick="markAttendance()">
+Mark Attendance
+</button>
+
+<table>
+
+<thead>
+<tr>
+<th>Student Name</th>
+<th>Roll Number</th>
+<th>Fee Status</th>
+<th>Attendance</th>
+<th>Time</th>
+</tr>
+</thead>
+
+<tbody id="attendanceTable">
+
+</tbody>
+
+</table>
+
+<script>
+
+function markAttendance(){
+
+let studentName =
+document.getElementById("studentName").value;
+
+let rollNo =
+document.getElementById("rollNo").value;
+
+let feeStatus =
+document.getElementById("feeStatus").value;
+
+if(studentName=="" || rollNo=="" || feeStatus==""){
+alert("Please Fill All Fields");
+return;
+}
+
+let currentTime =
+new Date().toLocaleTimeString();
+
+let table =
+document.getElementById("attendanceTable");
+
+table.innerHTML += `
+<tr>
+<td>${studentName}</td>
+<td>${rollNo}</td>
+<td>${feeStatus}</td>
+<td>✅ Present</td>
+<td>${currentTime}</td>
+</tr>
+`;
+
+document.getElementById("studentName").value="";
+document.getElementById("rollNo").value="";
+document.getElementById("feeStatus").value="";
+
+alert("Attendance Marked Successfully");
+
+}
+
+</script>
+
+</body>
+</html>

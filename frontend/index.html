@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBus AI</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+
+<body>
+    <script>
+
+if(localStorage.getItem("loggedIn")!=="true"){
+
+window.location.href="login.html";
+
+}
+
+</script>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+        <h2>🚌 SmartBus AI</h2>
+
+        <ul>
+            
+
+
+            <li onclick="window.location.href='index.html'">
+                🏠 Dashboard
+            </li>
+
+            <li onclick="window.location.href='tracking.html'">
+                📍 Live Tracking
+            </li>
+
+            <li onclick="window.location.href='routes.html'">
+                🚌 Routes
+            </li>
+
+            <li onclick="window.location.href='students.html'">
+                🎓 Students
+            </li>
+
+            <li onclick="window.location.href='drivers.html'">
+                👨‍✈️ Drivers
+            </li>
+
+            <!-- UPDATED ATTENDANCE -->
+            <li onclick="window.location.href='attendance.html'">
+                📋 Attendance
+            </li>
+
+            <li onclick="window.location.href='ai.html'">
+    🤖 AI Assistant
+</li>
+
+
+            <li onclick="sendSOS()">
+                🚨 SOS
+            </li>
+
+            <li onclick="showSettings()">
+                ⚙️ Settings
+            </li>
+            <li onclick="logout()">
+🚪 Logout
+</li>
+
+        </ul>
+
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <h1>🚌 SmartBus AI Dashboard</h1>
+
+        <p style="color:#94a3b8; margin-bottom:20px;">
+            Real-Time University Transport Monitoring System
+        </p>
+
+        <!-- CARDS -->
+        <div class="cards">
+
+            <div class="card">
+                <h3>🚌 Active Buses</h3>
+                <p>12</p>
+            </div>
+
+            <div class="card">
+                <h3>🎓 Students</h3>
+                <p>850</p>
+            </div>
+
+            <div class="card">
+                <h3>👨‍✈️ Drivers</h3>
+                <p>15</p>
+            </div>
+
+            <div class="card">
+                <h3>⏱️ ETA</h3>
+                <p>8 Min</p>
+            </div>
+
+        </div>
+
+        <!-- MAP -->
+        <div id="map"></div>
+
+        <!-- ANALYTICS -->
+        <div class="analytics">
+
+            <div class="box">
+                <h3>Total Trips</h3>
+                <p>1250</p>
+            </div>
+
+            <div class="box">
+                <h3>Attendance</h3>
+                <p>94%</p>
+            </div>
+
+            <div class="box">
+                <h3>Late Buses</h3>
+                <p>2</p>
+            </div>
+
+            <div class="box">
+                <h3>Fuel Saved</h3>
+                <p>320L</p>
+            </div>
+
+        </div>
+
+        <!-- STATUS -->
+        <div class="status-grid">
+
+            <div class="status-card">
+                <h3>🟢 Bus Status</h3>
+                <p>Running</p>
+            </div>
+
+            <div class="status-card">
+                <h3>📍 Route</h3>
+                <p>Vignan → Guntur</p>
+            </div>
+
+            <div class="status-card">
+                <h3>👥 Occupancy</h3>
+                <p>70%</p>
+            </div>
+
+            <div class="status-card">
+                <h3>🤖 AI Status</h3>
+                <p id="aiStatus">Loading...</p>
+            </div>
+
+        </div>
+
+        <!-- NOTIFICATIONS -->
+        <div class="notification-box">
+
+            <h2>🔔 Notifications</h2>
+            <ul>
+
+            <li>Bus VU-01 arriving in 8 mins</li>
+    <li>No delays detected</li>
+    <li>Route active</li>
+           </ul>
+
+
+</div>
+
+<div id="popupPanel"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

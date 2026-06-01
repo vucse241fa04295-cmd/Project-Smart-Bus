@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartBus AI Driver Panel</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="main">
+
+<h1>🚍 Driver GPS Tracking</h1>
+
+<input
+type="text"
+id="busNo"
+placeholder="Enter Bus Number">
+
+<br><br>
+
+<button onclick="startTracking()">
+📍 Start Live Tracking
+</button>
+
+<br><br>
+
+<div class="status-grid">
+
+<div class="status-card">
+<h3>🚌 Bus Number</h3>
+<p id="showBus">-</p>
+</div>
+
+<div class="status-card">
+<h3>📍 Latitude</h3>
+<p id="showLat">-</p>
+</div>
+
+<div class="status-card">
+<h3>📍 Longitude</h3>
+<p id="showLng">-</p>
+</div>
+
+<div class="status-card">
+<h3>📡 Status</h3>
+<p id="trackStatus">Waiting...</p>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let trackingStarted = false;
+
+function startTracking(){
+
+if(trackingStarted){
+alert("Tracking Already Running");
+return;
+}
+
+let busNo =
+document.getElementById("busNo").value;
+
+if(busNo==""){
+alert("Enter Bus Number");
+return;
+}
+
+trackingStarted = true;
+
+document.getElementById("showBus").innerHTML =
+busNo;
+
+document.getElementById("trackStatus").innerHTML =
+"🟢 Live";
+
+updateLocation(busNo);
+
+setInterval(()=>{
+
+updateLocation(busNo);
+
+},10000);
+
+}
+
+function updateLocation(busNo){
+
+navigator.geolocation.getCurrentPosition(
+
+(position)=>{
+
+let lat =
+position.coords.latitude;
+
+let lng =
+position.coords.longitude;
+
+document.getElementById("showLat").innerHTML =
+lat.toFixed(6);
+
+document.getElementById("showLng").innerHTML =
+lng.toFixed(6);
+
+fetch("http://127.0.0.1:5000/update_location",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+busNo:busNo,
+lat:lat,
+lng:lng
+
+})
+
+})
+
+.then(response=>response.json())
+.then(data=>{
+
+console.log(data);
+
+});
+
+},
+
+(error)=>{
+
+console.log(error);
+
+alert("GPS Permission Required");
+
+},
+
+{
+enableHighAccuracy:true
+}
+
+);
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Students Management</title>
+
+<style>
+
+body{
+background:#0f172a;
+color:white;
+font-family:Segoe UI,sans-serif;
+padding:30px;
+}
+
+h1{
+margin-bottom:20px;
+}
+
+.student-form{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+margin-bottom:30px;
+}
+
+.student-form input,
+.student-form select{
+padding:12px;
+border:none;
+border-radius:10px;
+background:#1e293b;
+color:white;
+}
+
+.student-form button{
+padding:12px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+.student-table{
+width:100%;
+border-collapse:collapse;
+background:#1e293b;
+}
+
+.student-table th{
+background:#2563eb;
+padding:15px;
+}
+
+.student-table td{
+padding:15px;
+text-align:center;
+border-bottom:1px solid #334155;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🎓 Students Management</h1>
+
+<div class="student-form">
+
+<input type="text" id="studentName" placeholder="Enter Student Name">
+
+<input type="text" id="rollNumber" placeholder="Enter Roll Number">
+
+<select id="route">
+<option value="">Select Route</option>
+<option>Guntur</option>
+<option>Narasaraopet</option>
+<option>Tenali</option>
+<option>Mangalagiri</option>
+</select>
+
+<select id="bus">
+<option value="">Select Bus</option>
+<option>AP39AB1234</option>
+<option>AP39AB1235</option>
+<option>AP39AB1236</option>
+</select>
+
+<input type="text" id="phone" placeholder="Phone Number">
+
+<input type="text" id="parentPhone" placeholder="Parent Number">
+
+<button onclick="registerStudent()">
+Add Student
+</button>
+
+</div>
+
+<table class="student-table">
+
+<thead>
+<tr>
+<th>Roll No</th>
+<th>Name</th>
+<th>Bus Number</th>
+<th>Route</th>
+<th>Phone</th>
+<th>Parent Phone</th>
+</tr>
+</thead>
+
+<tbody id="studentTableBody">
+
+</tbody>
+
+</table>
+
+<script>
+
+function registerStudent(){
+
+let name =
+document.getElementById("studentName").value;
+
+let roll =
+document.getElementById("rollNumber").value;
+
+let route =
+document.getElementById("route").value;
+
+let bus =
+document.getElementById("bus").value;
+
+let phone =
+document.getElementById("phone").value;
+
+let parent =
+document.getElementById("parentPhone").value;
+
+if(
+name=="" ||
+roll=="" ||
+route=="" ||
+bus=="" ||
+phone=="" ||
+parent==""
+){
+alert("Fill All Fields");
+return;
+}
+
+let table =
+document.getElementById("studentTableBody");
+
+table.innerHTML += `
+<tr>
+<td>${roll}</td>
+<td>${name}</td>
+<td>${bus}</td>
+<td>${route}</td>
+<td>${phone}</td>
+<td>${parent}</td>
+</tr>
+`;
+
+document.getElementById("studentName").value="";
+document.getElementById("rollNumber").value="";
+document.getElementById("route").value="";
+document.getElementById("bus").value="";
+document.getElementById("phone").value="";
+document.getElementById("parentPhone").value="";
+
+}
+
+</script>
+
+</body>
+</html>

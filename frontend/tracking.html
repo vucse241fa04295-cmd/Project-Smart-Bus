@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Bus Tracking</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+</head>
+<body>
+
+<div class="main">
+
+<h1>📍 Live Bus Tracking</h1>
+
+<input
+type="text"
+id="busNo"
+placeholder="Enter Bus Number (Example: AP39AB1234)"
+style="
+padding:12px;
+width:300px;
+border-radius:10px;
+margin-bottom:20px;
+">
+
+
+<button
+onclick="searchBus()"
+style="
+padding:12px 20px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+">
+Track Bus
+</button>
+
+<br><br>
+<div class="status-grid">
+
+    <div class="status-card">
+        <h3>🚌 Bus Number</h3>
+        <p id="busNumber">-</p>
+    </div>
+
+    <div class="status-card">
+        <h3>📍 Location</h3>
+        <p id="location">-</p>
+    </div>
+
+    <div class="status-card">
+        <h3>⏱ ETA</h3>
+        <p id="eta">8 Min</p>
+    </div>
+
+    <div class="status-card">
+        <h3>👨‍✈️ Driver</h3>
+        <p id="driver">Ramesh</p>
+    </div>
+
+    <div class="status-card">
+        <h3>💺 Available Seats</h3>
+        <p id="seats">12</p>
+    </div>
+
+    <div class="status-card">
+        <h3>📊 Occupancy</h3>
+        <p id="occupancy">28/40</p>
+    </div>
+
+    <div class="status-card">
+        <h3>🛣 Route</h3>
+        <p id="route">Vignan → Guntur</p>
+    </div>
+
+    <div class="status-card">
+        <h3>🟢 Status</h3>
+        <p id="status">Live Tracking</p>
+    </div>
+
+</div>
+
+<div id="map"></div>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
