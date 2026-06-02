@@ -14,7 +14,7 @@ bus_data = {
 
 @app.route("/")
 def home():
-    return "SmartBus AI Backend Running"
+    return send_from_directory("frontend", "index.html")
 
 @app.route("/update_location", methods=["POST"])
 def update_location():
